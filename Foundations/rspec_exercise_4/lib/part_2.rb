@@ -1,35 +1,31 @@
-def my_reject(arry, &prc)
-    newarr = []
-    arry.each do |ele|
-        if !prc.call(ele)
-            newarr << ele
+def proper_factors(num)
+    arr  = []
+    (1..num/2).each do |fact|
+        if num % fact == 0
+            arr << fact
         end
     end
-    newarr
+    arr
 end
 
+def aliquot_sum(num)
+    proper_factors(num).sum
+end
 
-def my_one?(array, &prc)
+def perfect_number?(num)
+    num == aliquot_sum(num)
+end
+
+def ideal_numbers(n)
     count = 0
-    array.each do |ele|
-        if prc.call(ele)
+    num = 1
+    arr = []
+    while count != n
+        if perfect_number?(num)
             count += 1
-            return false if count > 1
+            arr << num
         end
+        num += 1
     end
-    if count == 1
-        return true
-    else
-        return false
-    end
-end
-
-def hash_select(hash, &prc)
-    hashn = {}
-    hash.each do |key, val|
-        if prc.call(key, val)
-            hashn[key] = val
-        end
-    end
-    hashn
+    arr
 end
