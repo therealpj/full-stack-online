@@ -114,26 +114,29 @@ end
 # PHASE 3
 
 def matrix_addition_reloaded(*matrices)
-    if matrices.length == 1 
-        return matrices[0]
-    end
-    
-    col = matrices[0].length
-    row = matrices[0][0].length
-    return nil if !matrices.all? {|matrix| matrix[0].length == col && matrix.length == row} 
+    matrix = matrices.first
+    row = matrix.length
+    col = matrix[0].length
 
-    summat = Array.new(row) {Array.new(col)}
-    sum = 0
-    (0...row).each do |i|
-        (0...col).each do |j|
-        matrices.each {|matrix| sum += matrix[i][j]}
-        summat[i][j] = sum
-        sum = 0
-        end
-    end
-    summat
+    summat = Array.new(row) {[0] * col}
+    matrices.inject(summat) do |m1, m2|
+        return nil if m2.length != row || m2[0].length != col
+        matrix_addition(m1, m2)
+    end 
 end
 
+def matrix_addition(m1, m2)
+    height = m1.length
+    width = m1[0].length
+    sum = Array.new(height) {[0] * width}
+
+    (0...height).each do |row|
+        (0...width).each do |col|
+            sum[row][col] = m1[row][col] + m2[row][col]
+        end
+    end
+    sum
+end
 matrix_a = [[2,5], [4,7]]
 matrix_b = [[9,1], [3,0]]
 matrix_c = [[-1,0], [0,-1]]
