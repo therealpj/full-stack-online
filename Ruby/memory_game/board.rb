@@ -1,6 +1,7 @@
 require_relative "card.rb"
 class Board
 
+    attr_reader :board
 
     # initialize a shuffled (n * n) board, n is even. 
     # Otherwise, a card will be left.
@@ -41,10 +42,6 @@ class Board
     end
 
 
-    def [](pos)
-        r, c = pos
-        @board[r.to_i][c.to_i]
-    end
 
     # pretty print the board
     def render
@@ -75,15 +72,19 @@ class Board
     end
 
     def reveal(guessed_pos)
+        guessed_pos = guessed_pos.map {|ele| ele.to_i}
         @board[guessed_pos[0]][guessed_pos[1]].reveal
         return @board[guessed_pos[0]][guessed_pos[1]].face_value
     end
 
-
+    def hide(guessed_pos)
+        guessed_pos = guessed_pos.map {|ele| ele.to_i}
+        @board[guessed_pos[0]][guessed_pos[1]].hide
+        return @board[guessed_pos[0]][guessed_pos[1]].face_value
+    end
 
 
 end
-
 
 
 

@@ -21,7 +21,7 @@ class Game
                 guessed = gets.chomp.split(',')
                 invalid_pos = invalid(guessed)    
             end
-            @board[guessed].reveal
+            @board.reveal(guessed)
             make_guess(guessed)
         end
     end
@@ -40,16 +40,19 @@ class Game
         if @checking_another_card
             if @board[guessed].eq(@board[@prev_guess])
                 puts "Now thats a match :)"
+                sleep(1)
             else
                 puts "Wrong guess :("
-
+                system("clear")
+                @board.render
                 sleep(1)
-                @board[guessed].hide
-                @board[@prev_guess].hide
+                @board.hide(guessed)
+                @board.hide(@prev_guess)
             end
 
             @checking_another_card = false
         else
+            sleep(1)
             @prev_guess = guessed.dup
             @checking_another_card = true
         end
