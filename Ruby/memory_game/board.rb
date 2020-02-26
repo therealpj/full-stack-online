@@ -41,6 +41,12 @@ class Board
         @board.length
     end
 
+    def [](pos)
+        x, y = pos
+        x = x.to_i
+        y = y.to_i
+        @board[x][y]
+    end
 
 
     # pretty print the board
