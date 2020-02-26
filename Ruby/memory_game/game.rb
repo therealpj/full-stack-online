@@ -7,6 +7,7 @@ class Game
         @board = Board.new(n)
         @prev_guess = []
         @checking_another_card = false
+        @flipped_cards = []
     end
 
     def play
@@ -24,6 +25,10 @@ class Game
             @board.reveal(guessed)
             make_guess(guessed)
         end
+        system("clear")
+        @board.render
+        puts "\n*****Game Over*****\n!"
+        puts "Well played!!"
     end
 
     def invalid(guessed)
@@ -37,25 +42,33 @@ class Game
 
     def make_guess(guessed)
         
+        if @flipped_cards.include?(guessed) || guessed == @prev_guess 
+            puts "Hey you flipped that already"
+            sleep(1)
+            return 
+        end
+
         if @checking_another_card
             if @board[guessed].eq(@board[@prev_guess])
                 puts "Now thats a match :)"
+                @flipped_cards << guessed
                 sleep(1)
             else
-                puts "Wrong guess :("
                 system("clear")
                 @board.render
+                puts "Wrong guess :("
                 sleep(1)
                 @board.hide(guessed)
                 @board.hide(@prev_guess)
             end
-
+            prev = []
             @checking_another_card = false
         else
             sleep(1)
             @prev_guess = guessed.dup
             @checking_another_card = true
         end
+        
     end
 
 end
