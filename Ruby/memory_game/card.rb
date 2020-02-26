@@ -17,7 +17,7 @@ class Card
     end
 
     def hidden?
-        @face_up == true
+        !@face_up
     end
 
     def hide

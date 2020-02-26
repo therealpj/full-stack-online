@@ -15,5 +15,17 @@ class HumanPlayer
         guessed
     end
 
+    def recieve_matched_cards(p1, p2)
+        return
+    end
+
+    def size(board_size)
+        return 
+    end
+
+    def recieve_revealed_card(card, pos)
+        return
+    end
+
     
 end

@@ -6,6 +6,7 @@ class Board
     # initialize a shuffled (n * n) board, n is even. 
     # Otherwise, a card will be left.
     def initialize(n)
+        @values_in_board = Array.new
         @board = populate(n)
     end
 
@@ -15,13 +16,19 @@ class Board
         pairs = (n * n) / 2
         count = 0
         value = ("A".."Z").to_a.sample
-        
+
         # Fill in 2 of a card sequentially
         board.each.with_index do |arr, row|
             arr.each.with_index do |ele, col|
-                
                 if count == 2
+                    @values_in_board << value
                     value = ("A".."Z").to_a.sample
+                    
+                    # if value is already in board, change it
+                    while @values_in_board.include?(value)
+                        value = ("A".."Z").to_a.sample
+                    end
+
                     count = 0
                 end
 
@@ -32,9 +39,8 @@ class Board
         end
 
         # Shuffle it up
-        board = board.map {|row| row.shuffle}
-        board = board.shuffle
-        
+        board = board.flatten.shuffle.each_slice(n).to_a
+        board
     end
 
     def size
@@ -70,7 +76,7 @@ class Board
     def won?
         @board.each do |arr|
             arr.each do |card|
-                return false if !card.hidden?
+                return false if card.hidden?
             end
         end
 
@@ -78,13 +84,13 @@ class Board
     end
 
     def reveal(guessed_pos)
-        guessed_pos = guessed_pos.map {|ele| ele.to_i}
+        # guessed_pos = guessed_pos.map {|ele| ele.to_i}
         @board[guessed_pos[0]][guessed_pos[1]].reveal
         return @board[guessed_pos[0]][guessed_pos[1]].face_value
     end
 
     def hide(guessed_pos)
-        guessed_pos = guessed_pos.map {|ele| ele.to_i}
+        # guessed_pos = guessed_pos.map {|ele| ele.to_i}
         @board[guessed_pos[0]][guessed_pos[1]].hide
         return @board[guessed_pos[0]][guessed_pos[1]].face_value
     end
