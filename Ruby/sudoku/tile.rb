@@ -14,7 +14,7 @@ class Tile
         if @given 
             return @value.to_s.colorize(:color => :light_yellow, :background => :default)
         else
-            return @value.to_s.colorize(:color => :blue, :background => :default)
+            return @value.to_s.colorize(:color => :light_red, :background => :default)
         end
     end
 

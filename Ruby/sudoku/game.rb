@@ -1,10 +1,13 @@
 require_relative 'board.rb'
-
+require_relative 'solver.rb'
 class Game
 
-    def initialize(file, solver=nil)
+    def initialize(file, solver=false)
         @board = Board.from_file(file)
-        @solver = solver
+        
+        if solver
+            @solver = Solver.new(@board)
+        end
     end
 
     def render
@@ -13,13 +16,12 @@ class Game
     end
 
     def play
-        title
-
-        if solver
-            @board = @solver.solve(board)
-        end    
-
+        if @solver
+            puts "Solving..."
+            @solver.solve
+            render
         else
+            title
             until @board.solved?
                 render
                 pos  = get_position
@@ -81,3 +83,23 @@ class Game
 
 end
 
+if __FILE__ == $PROGRAM_NAME
+    puts 'Enter sudoku file'
+    file = gets.chomp 
+    puts 'Do you want to me to solve it? (y/n)'
+    n = gets.chomp.to_s
+    
+    until ["y", "n"].include?(n)
+        puts 'Enter y or n'
+        n = gets.chomp
+    end
+
+    if n == "y"
+        solver = true 
+    else
+        solver = false
+    end
+
+    game = Game.new(file, solver)
+    game.play
+end
