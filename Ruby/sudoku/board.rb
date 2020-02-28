@@ -11,11 +11,11 @@ class Board
         border
         puts
         @board.each.with_index do |arr, row|
-            print "| ".colorize(:black)
+            print "| ".colorize(:cyan)
             arr.each.with_index do |tile, col|
                 print tile.to_s
                 if col % 3 == 2
-                    print " | ".colorize(:black)
+                    print " | ".colorize(:cyan)
                 else
                     print "  "
                 end
@@ -23,7 +23,7 @@ class Board
 
 
             print "\r" # carriage return for last hanging " "
-            print " |".colorize(:black)
+            print " |".colorize(:cyan)
             puts
             if row % 3 == 2
                 border
@@ -36,7 +36,7 @@ class Board
 
     def border
         32.times do
-            print "-".colorize(:black)
+            print "-".colorize(:cyan)
         end
     end
 

@@ -12,9 +12,9 @@ class Tile
 
     def to_s
         if @given 
-            return @value.to_s.colorize(:color => :light_yellow, :background => :default)
+            return @value.to_s.colorize(:color => :blue, :background => :default)
         else
-            return @value.to_s.colorize(:color => :light_red, :background => :default)
+            return @value.to_s.colorize(:color => :red, :background => :default)
         end
     end
 
