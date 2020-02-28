@@ -61,7 +61,7 @@ class Board
     end
 
     def sub_grid(index)
-        r, c = mapper(index)
+        r, c = mapper(index).map {|val| val * 3}
         row = []
         sub_grid = []
         

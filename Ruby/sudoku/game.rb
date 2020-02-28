@@ -2,8 +2,9 @@ require_relative 'board.rb'
 
 class Game
 
-    def initialize(file)
+    def initialize(file, solver=nil)
         @board = Board.from_file(file)
+        @solver = solver
     end
 
     def render
@@ -13,13 +14,20 @@ class Game
 
     def play
         title
-        until @board.solved?
-            render
-            pos  = get_position
-            val = get_value
-            @board[pos] = val
+
+        if solver
+            @board = @solver.solve(board)
+        end    
+
+        else
+            until @board.solved?
+                render
+                pos  = get_position
+                val = get_value
+                @board[pos] = val
+            end
         end
-        
+
         render
         puts "**********************"
         puts "********SOLVED********"
