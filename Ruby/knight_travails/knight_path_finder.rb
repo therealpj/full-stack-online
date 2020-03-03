@@ -6,7 +6,7 @@ class KnightPathFinder
         @considered_positions = Set.new
         @considered_positions.add(@start)
         
-        # build_move_tree
+        @tree = build_move_tree
     end
     
 
@@ -60,5 +60,19 @@ class KnightPathFinder
         start
     end
 
+    def find_path(target)
+        target_node = @tree.bfs(target)
+        trace_path_back(target_node)
+    end
+
+    def trace_path_back(node)
+        path = []
+        while node.parent != nil
+            path << node
+            node = node.parent
+        end
+        path << node
+        path
+    end
 
 end
