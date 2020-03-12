@@ -37,17 +37,3 @@ class Piece
     end
 
 end
-
-class NullPiece < Piece
-    def initialize
-    end
-
-    def moves
-        return nil
-    end
-    
-    def symbol
-        return " "
-    end
-
-end
