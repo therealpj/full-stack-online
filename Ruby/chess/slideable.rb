@@ -1,3 +1,4 @@
+require 'byebug'
 module Slideable
     def moves
         all = []
@@ -25,13 +26,17 @@ module Slideable
         new_row = row + dx
         new_col = col + dy
         
-        while valid_pos([new_row, new_col]) && !board.rows[new_row][new_col].is_a?(Piece)
+        # debugger
+        a = valid_pos([new_row, new_col])
+        b = board.rows[new_row][new_col].is_a?(NullPiece)
+        
+        while a && b
             moves << [new_row, new_col]
             new_row += dx
             new_col += dy
         end
 
-        # if the next piece is an opponent, capture it
+        # if the next piece is an opponent, you can capture it
         if valid_pos([new_row, new_col]) && self.color != self.board.rows[new_row][new_col].color
             moves << [new_row, new_col]
         end

@@ -11,7 +11,7 @@ class Pawn < Piece
 
     def at_start_row?
         return true if self.pos[0] == 1 && self.color == :white
-        return true if self.pos[0] == 7 && self.color == :black
+        return true if self.pos[0] == 6 && self.color == :black
         return false
     end
 
@@ -26,6 +26,11 @@ class Pawn < Piece
     def moves
         moves = []
         row, col = self.pos
+        #check if next position is blocked
+        if !board.rows[row + forward_dir][col].is_a?(NullPiece)
+            return side_attacks
+        end
+
         if at_start_row?
             moves << [row + forward_dir + forward_dir, col]
         end

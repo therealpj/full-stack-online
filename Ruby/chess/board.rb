@@ -65,6 +65,7 @@ class Board
             end
             puts
         end
+        return
     end
 
 
