@@ -11,6 +11,8 @@ class Board
                     @rows[row][col] = Piece.new(:white, self, [row, col])
                 elsif row == 7 || row == 8
                     @rows[row][col] = Piece.new(:black, self, [row, col])
+                else
+                    @rows[row][col] = NullPiece.instance
                 end
             end
         end
