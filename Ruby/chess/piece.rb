@@ -1,5 +1,4 @@
 require 'colorize'
-
 class Piece
     attr_reader :color, :board, :pos
     def initialize(color, board, pos)
@@ -12,14 +11,14 @@ class Piece
         symbol.to_s
     end
 
+
     def empty?
         row, col = @pos
         @board.rows[row][col].is_a?(Piece)
     end
 
     def valid_moves
-        valid = []
-        return valid
+        self.moves
     end
 
     def pos=(val)
@@ -28,7 +27,7 @@ class Piece
     end
     
     def symbol
-        :piece
+        raise NotImplementedError
     end
 
     def move_into_check?(end_pos)

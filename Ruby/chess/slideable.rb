@@ -41,8 +41,8 @@ module Slideable
 
     def valid_pos(pos)
         row, col = pos
-        return false unless row.between?(0, 8)
-        return false unless col.between?(0, 8)
+        return false unless row.between?(0, 7)
+        return false unless col.between?(0, 7)
         return true
     end
 

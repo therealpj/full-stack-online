@@ -9,7 +9,7 @@ class Bishop < Piece
     end
 
     def symbol
-        ♗.colorize(color)
+        '♗'
     end
 
     def move_dirs

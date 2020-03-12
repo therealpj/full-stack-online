@@ -9,7 +9,7 @@ class Queen < Piece
     end
 
     def symbol
-        ♕
+        '♕'
     end
 
     def move_dirs
