@@ -1,4 +1,4 @@
-load  'pieces.rb'
+require_relative 'pieces.rb'
 
 class Board
     attr_reader :rows
@@ -29,8 +29,7 @@ class Board
                     if col == 0 || col == 7
                         @rows[row][col] = Rook.new(:black, self, [row, col])
                     elsif col == 1 || col == 6
-                        @rows[row][col] = Knight.new(:black, self, 
-                        [row, col])
+                        @rows[row][col] = Knight.new(:black, self,[row, col])
                     elsif col == 2 || col == 5
                         @rows[row][col] = Bishop.new(:black, self, [row, col])
                     elsif col == 3
@@ -57,15 +56,11 @@ class Board
         @rows[row][col] = NullPiece.instance
     end
 
-    def p
-        @rows.each do |row|
-            row.each do |ele|
-                print ele.symbol
-                
-            end
-            puts
-        end
-        return
+    def in_check?(color)
+        king_pos = find_king(color)
+    end
+
+    def find_king
     end
 
 

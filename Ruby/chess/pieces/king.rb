@@ -1,19 +1,17 @@
-load 'piece.rb'
-load 'slideable.rb'
+require_relative 'steppable.rb'
 
-class Bishop < Piece
-    include Slideable
-    
+class King < Piece
+    include Steppable
     def initialize(color, board, pos)
         super(color, board, pos)
     end
 
     def symbol
-        '♗'
+        '♔'	
     end
 
     def move_dirs
-        [:d]
+        [:one]
     end
 
 end
