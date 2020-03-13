@@ -25,12 +25,8 @@ module Slideable
         moves = []
         new_row = row + dx
         new_col = col + dy
-        
-        # debugger
-        a = valid_pos([new_row, new_col])
-        b = board.rows[new_row][new_col].is_a?(NullPiece)
-        
-        while a && b
+
+        while valid_pos([new_row, new_col]) && board.rows[new_row][new_col].is_a?(NullPiece)
             moves << [new_row, new_col]
             new_row += dx
             new_col += dy

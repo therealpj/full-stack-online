@@ -57,11 +57,64 @@ class Board
     end
 
     def in_check?(color)
+        opposite_color = color == :black ? :white : :black
         king_pos = find_king(color)
+
+        @rows.each.with_index do |arr, row|
+            arr.each.with_index do |ele, col|
+                next if ele.is_a?(NullPiece)
+                next if ele.color == color
+                return true if ele.moves.include?(king_pos)
+            end
+        end
+        
+        return false
     end
 
-    def find_king
+
+    def find_king(color)
+        # choosing a particular side on the board to make search quicker
+        if color == :white
+            start_pos = [0, 0]
+            increment = 1
+        else
+            start_pos = [7, 7]
+            increment = -1
+        end
+
+        r, c = start_pos
+        while true
+
+            if @rows[r][c].is_a?(King)
+                return [r, c] if @rows[r][c].color == color
+            end
+            c += increment
+            if c == -1 || c == 8
+                c = c == -1 ? 7 : 0
+                r += increment
+            end
+        end
+
     end
 
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
