@@ -1,6 +1,7 @@
 require 'colorize'
 class Piece
     attr_reader :color, :board, :pos
+    
     def initialize(color, board, pos)
         @color = color
         @board = board
@@ -31,8 +32,7 @@ class Piece
     end
 
     def move_into_check?(end_pos)
-        valid = valid_moves
-        return valid.include?(end_pos)
+
     end
 
 end

@@ -3,7 +3,12 @@ require_relative 'pieces.rb'
 class Board
     attr_reader :rows
 
-    def initialize()
+    def initialize(rows=nil)
+        if rows
+            @rows = rows
+            return 
+        end
+
         @rows = Array.new(8) {Array.new(8, default=nil)}
         @rows.each.with_index do |arr, row|
             arr.each_with_index do |tile, col|
@@ -72,7 +77,14 @@ class Board
     end
 
     def checkmate?(color)
-        
+        return false unless in_check?(color)
+        @rows.each do |arr, row|
+            arr.each do |ele, col|
+                return false if ele.color == color && ele.valid_moves != []
+            end
+        end
+
+        return true
     end
 
     def find_king(color)
@@ -100,6 +112,24 @@ class Board
 
     end
 
+    def dup
+        dup_rows = Array.new(8) {Array.new(8)}
+        board = Board.new(dup_rows)
+        @rows.each.with_index do |arr, row|
+            arr.each.with_index do |piece, col|
+                type_of_piece = piece.class
+
+                if type_of_piece == NullPiece
+                    dup_rows[row][col] = type_of_piece.instance
+                else
+                    dup_rows[row][col] = type_of_piece.new(piece.color, board, [row, col] )
+                end
+            end
+        end
+        
+        board = Board.new(dup_rows)
+        board
+    end
 
 end
 
