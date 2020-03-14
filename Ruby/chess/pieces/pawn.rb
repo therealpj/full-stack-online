@@ -32,7 +32,8 @@ class Pawn < Piece
         end
 
         if at_start_row?
-            moves << [row + forward_dir + forward_dir, col]
+            next_pos = [row + forward_dir + forward_dir, col]
+            moves << next_pos if @board.rows[next_pos[0]][next_pos[1]].is_a?(NullPiece)
         end
 
         if self.board.rows[row + forward_dir][col].is_a?(NullPiece)

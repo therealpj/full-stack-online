@@ -83,8 +83,12 @@ class Board
 
     def checkmate?(color)
         return false unless in_check?(color)
-        @rows.each do |arr, row|
-            arr.each do |ele, col|
+        @rows.each.with_index do |arr, row|
+            arr.each.with_index do |ele, col|
+                if  ele.valid_moves != []
+                    print ele.pos
+                end
+
                 return false if ele.color == color && ele.valid_moves != []
             end
         end
