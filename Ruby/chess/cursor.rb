@@ -96,10 +96,7 @@ class Cursor
     new_col = @cursor_pos[1] + diff[1]
 
     return unless valid_pos?([new_row, new_col])
-    @cursor_pos[0] = new_row
-    @cursor_pos[1] = new_col
-  end
-
+    @cursor_pos[0] = new_rowboard
   def valid_pos?(pos)
     r, c = pos
     return false unless r.between?(0, 7) 
@@ -107,7 +104,7 @@ class Cursor
     return true 
   end
 
-  def toggle_selected
+  def toggle_selectedboard
     @selected = !@selected
   end
 

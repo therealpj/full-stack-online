@@ -48,6 +48,10 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
+        unless @rows[start_pos[0]][start_pos[1]].valid_moves.include?(end_pos)
+            puts "Umm... That doesn't seem like the right move for that piece"
+        end
+
         row, col = start_pos
         newrow, newcol = end_pos
         raise "No piece at specified position" if @rows[row][col].is_a?(NullPiece)
@@ -59,6 +63,8 @@ class Board
 
         @rows[newrow][newcol] = piece
         @rows[row][col] = NullPiece.instance
+
+        raise "Board in check" if in_check?(@rows[end_pos[0]][end_pos[1]])
     end
 
     def in_check?(color)
