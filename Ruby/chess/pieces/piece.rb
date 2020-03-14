@@ -24,7 +24,7 @@ class Piece
 
     def pos=(val)
         row, col = pos
-        @board[row][col] = val
+        @pos = val
     end
     
     def symbol
@@ -37,5 +37,20 @@ class Piece
         return true if dup_board.in_check?(self.color)
         return false
     end
+
+    def convert(*n)
+        moves = []
+        n.each do |notation|
+
+            col = notation[0]
+            row = notation[1]
+
+            col = col.ord - 'a'.ord
+            row = row.to_i - 1
+            moves <<  [row, col]
+        end
+        moves
+    end
+
 
 end

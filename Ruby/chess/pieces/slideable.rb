@@ -1,4 +1,5 @@
-require 'byebug'
+# require 'byebug'
+require_relative '../display.rb'
 module Slideable
     def moves
         all = []
@@ -13,6 +14,8 @@ module Slideable
         end
 
         if self.move_dirs.include?(:d)
+            all += valid_move_adder(1, -1)
+            all += valid_move_adder(-1, 1)
             all += valid_move_adder(1, 1)
             all += valid_move_adder(-1, -1)
         end
@@ -25,12 +28,13 @@ module Slideable
         moves = []
         new_row = row + dx
         new_col = col + dy
-
-        while valid_pos([new_row, new_col]) && board.rows[new_row][new_col].is_a?(NullPiece)
+        
+        while valid_pos([new_row, new_col]) && @board.rows[new_row][new_col].is_a?(NullPiece)
             moves << [new_row, new_col]
             new_row += dx
             new_col += dy
         end
+
 
         # if the next piece is an opponent, you can capture it
         if valid_pos([new_row, new_col]) && self.color != self.board.rows[new_row][new_col].color

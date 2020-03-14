@@ -48,27 +48,26 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        unless @rows[start_pos[0]][start_pos[1]].valid_moves.include?(end_pos)
-            puts "Umm... That doesn't seem like the right move for that piece"
-        end
 
         row, col = start_pos
         newrow, newcol = end_pos
+
         raise "No piece at specified position" if @rows[row][col].is_a?(NullPiece)
         
-        piece = self.rows[row][col]
+        piece = @rows[row][col]
         moves = piece.moves
 
         raise "Cannot move to end position" unless moves.include?(end_pos)
 
         @rows[newrow][newcol] = piece
+        @rows[newrow][newcol].pos = [newrow, newcol]
+
         @rows[row][col] = NullPiece.instance
 
-        raise "Board in check" if in_check?(@rows[end_pos[0]][end_pos[1]])
+        # raise "Board in check" if in_check?(@rows[end_pos[0]][end_pos[1]])
     end
 
     def in_check?(color)
-        opposite_color = color == :black ? :white : :black
         king_pos = find_king(color)
 
         @rows.each.with_index do |arr, row|
@@ -105,7 +104,6 @@ class Board
 
         r, c = start_pos
         while true
-
             if @rows[r][c].is_a?(King)
                 return [r, c] if @rows[r][c].color == color
             end
@@ -138,21 +136,6 @@ class Board
     end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
