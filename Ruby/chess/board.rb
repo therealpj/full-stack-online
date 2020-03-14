@@ -71,6 +71,9 @@ class Board
         return false
     end
 
+    def checkmate?(color)
+        
+    end
 
     def find_king(color)
         # choosing a particular side on the board to make search quicker

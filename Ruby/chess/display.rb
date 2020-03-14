@@ -10,8 +10,16 @@ class Display
     end
     
     def render
+        alphabets = ('a'..'h').to_a #
+        num = (1..8).to_a   #
         system("clear")
+        print " "
+        num.each do |n|
+            print " " + (n - 1).to_s + " "
+        end
+        puts
         @board.rows.each.with_index do |arr, row|
+            print num[7 - row]  #
             arr.each.with_index do |piece, col|
                 tile_color = [row, col] == cursor.cursor_pos ? selected_or_not : tile_color(row, col)
                 
@@ -19,8 +27,15 @@ class Display
                 print piece.symbol.colorize(:background => tile_color)
                 print " ".colorize(:background => tile_color)
             end
+            print num[row] - 1
             puts
         end
+
+        print " " #
+        alphabets.each do |a|   #
+            print " " + a + " "#
+        end#
+
         nil
     end
     
@@ -46,7 +61,3 @@ class Display
     end
 
 end
-require_relative 'board.rb'
-b = Board.new
-d = Display.new(b)
-d.play
