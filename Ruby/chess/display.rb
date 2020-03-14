@@ -24,7 +24,7 @@ class Display
                 tile_color = [row, col] == cursor.cursor_pos ? selected_or_not : tile_color(row, col)
                 
                 print " ".colorize(:background => tile_color)
-                print piece.symbol.colorize(:background => tile_color)
+                print piece.symbol.colorize(:color => piece.color, :background => tile_color)
                 print " ".colorize(:background => tile_color)
             end
             print num[row] - 1
@@ -49,7 +49,7 @@ class Display
     end
 
     def tile_color(row, col)
-        color = (row + col).even? ? :light_blue : :light_black
+        color = (row + col).even? ? :light_yellow : :light_blue
         return color
     end
 
