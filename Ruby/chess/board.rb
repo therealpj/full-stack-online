@@ -57,14 +57,11 @@ class Board
         piece = @rows[row][col]
         moves = piece.moves
 
-        raise "Cannot move to end position" unless moves.include?(end_pos)
-
         @rows[newrow][newcol] = piece
         @rows[newrow][newcol].pos = [newrow, newcol]
 
         @rows[row][col] = NullPiece.instance
 
-        # raise "Board in check" if in_check?(@rows[end_pos[0]][end_pos[1]])
     end
 
     def in_check?(color)

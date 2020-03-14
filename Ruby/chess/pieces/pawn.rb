@@ -27,8 +27,10 @@ class Pawn < Piece
         moves = []
         row, col = self.pos
         #check if next position is blocked
-        if !board.rows[row + forward_dir][col].is_a?(NullPiece)
-            return side_attacks
+        if valid_pos([row+forward_dir, col])
+            if !board.rows[row + forward_dir][col].is_a?(NullPiece)
+                return side_attacks
+            end
         end
 
         if at_start_row?
@@ -36,8 +38,10 @@ class Pawn < Piece
             moves << next_pos if @board.rows[next_pos[0]][next_pos[1]].is_a?(NullPiece)
         end
 
-        if self.board.rows[row + forward_dir][col].is_a?(NullPiece)
-            moves << [row + forward_dir, col]
+        if valid_pos([row+forward_dir, col])
+            if self.board.rows[row + forward_dir][col].is_a?(NullPiece)
+                moves << [row + forward_dir, col]
+            end
         end
 
         moves += side_attacks
