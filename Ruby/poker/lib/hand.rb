@@ -12,11 +12,12 @@ class Hand
         :high_card
     ]
     
+    attr_reader :cards
     def initialize(cards)
         raise "Each hand must have 5 cards" unless cards.length == 0
         @cards = cards.sort
     end
 
-
+    
 
 end
