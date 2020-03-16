@@ -1,4 +1,4 @@
-require 'card'
+require_relative 'card.rb'
 
 class Deck
     SUITS = [:spade, :club, :diamond, :heart]

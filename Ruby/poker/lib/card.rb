@@ -43,6 +43,10 @@ class Card
         end
     end
 
+    def <=>(card_2)
+        @value <=> card_2.value
+    end
+
 
 end
 
