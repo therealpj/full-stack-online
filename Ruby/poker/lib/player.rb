@@ -2,11 +2,13 @@ require_relative 'hand.rb'
 
 class Player
 
-    attr_reader :hand, :pot, :name
-    def initialize(name, hand, pot)
+
+    attr_reader :hand, :bakroll, :name
+    def initialize(name, hand, bankroll)
         @name = name
-        @pot = pot
+        @bankroll = bankroll
         @hand = hand
+        @current_bet = 0
     end
 
     def discard_at(positions)
@@ -43,8 +45,7 @@ class Player
         end
     end
 
-    def get_input
-
+    def get_choice
         begin
             puts 'What do you want to do, ' + name
             puts "1. Fold"
@@ -58,6 +59,53 @@ class Player
             retry 
         end
     end
+
+    def get_bet
+        valid = false
+        until valid
+            bet = gets.chomp.to_i
+            valid = valid_bet?(bet)
+            unless valid
+                puts "Invalid amount. Please retry. (bankroll: #{bankroll})"
+            end
+        end
+
+        bet
+    end
+
+    def take_bet(total_bet)  
+        amount = total_bet - @current_bet
+        raise 'not enough money' unless amount <= bankroll
+        @current_bet = total_bet   
+        bankroll -=amount
+        amount
+    end
+
+    def valid_bet?(bet)
+        return false if bet > bankroll
+        return false if bet <= 0
+        return true
+    end
+
+    def recieve_winnings(amount)
+        @bankroll += amount
+    end
+
+    def deal_in(hand)
+        @hand = hand
+    end
+
+
+    def return_cards
+        cards = hand.cards
+        @hand = nil
+        cards
+    end
+
+    def trade_cards(old_cards, new_cards)
+        hand.trade_cards(old_cards, new_cards)
+    end
+
 
     def valid?(choice)
         valid_choices = [
