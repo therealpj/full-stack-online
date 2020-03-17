@@ -20,11 +20,11 @@ class Player
         end
         
         # printing out the discarded cards
+        print "Discarded: "
         dicarded.each do |card|
             print card.symbol 
-            print " "
+            puts " "
         end
-        print " :Discarded"
         
         hand.cards.select! {|card| card != nil}
         return positions.length
@@ -40,6 +40,33 @@ class Player
             puts 'Invalid input'
             retry
         end
+    end
+
+    def get_input
+
+        begin
+            puts 'What do you want to do?'
+            puts "1. Fold"
+            puts "2. Raise"
+            puts "3. See the current bet"
+
+            choice = gets.chomp
+            valid?(choice)
+        rescue 
+            puts "Invalid choice. Please retry"
+            retry 
+        end
+    end
+
+    def valid?(choice)
+        valid_choices = [
+            '1', '2', '3', 
+            'fold', 'Fold', 'f', 
+            'raise', 'Raise', 'r',
+            'see', 'See', 'S'
+        ]
+        raise "Invalid choice" unless valid_choices.include?(choice)
+        return true
     end
 
 end

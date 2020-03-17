@@ -46,6 +46,7 @@ describe 'Player' do
         end
 
         it 'when passed in an array of positions correctly discard_ats them from hand' do
+            # pretty stupid of this guy to discard a straight flush
             expect(player1.discard_at([0, 1])).to eq(2)
             expect(player1.hand.cards.length).to eq(3)
             hand2.cards.shift
@@ -61,6 +62,33 @@ describe 'Player' do
             expect(values_orig).to eql(values_doub)
 
         end
-
     end
+
+    context '#valid?' do
+
+        let(:valid_choices) {[
+            '1', '2', '3', 
+            'fold', 'Fold', 'f', 
+            'raise', 'Raise', 'r',
+            'see', 'See', 'S'
+        ]}
+
+        it 'accepts a choice as argument' do
+            expect {player1.valid?('f')}.not_to raise_error
+        end
+
+        it 'when passed in an invalid option raises error' do
+            expect {player1.valid?('not a valid option')}.to raise_error("Invalid choice")
+            expect {player1.valid?('b')}.to raise_error("Invalid choice")
+        end
+
+        it 'when passed in a valid option returns true' do 
+            valid_choices.each do |choice|
+                expect(player1.valid?(choice)).to eq true 
+            end
+        end
+
+        # it 'when passed in an ainvalid '
+    end
+
 end
