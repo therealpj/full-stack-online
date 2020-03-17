@@ -16,7 +16,7 @@ describe '#HandType' do
         Card.new(:diamond, 12),
         Card.new(:club, 12),
         Card.new(:spade, 12),
-        Card.new(:diamond, 4),
+        Card.new(:diamond, 5),
     ])}
 
     let(:full_house_hand) {Hand.new([

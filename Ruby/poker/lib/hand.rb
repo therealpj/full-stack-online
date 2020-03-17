@@ -1,4 +1,5 @@
 require_relative 'hand_type'
+require_relative 'tie_breaker.rb'
 
 class Hand
     HAND_PRIORITY = [
@@ -24,5 +25,27 @@ class Hand
         type.type
     end
 
+    def priority
+        # a lower number means higher priority
+        HAND_PRIORITY.index(hand_type)
+    end
 
+    # def break_tie(hand2)
+        
+    #     if self.cards[0].value == 1 && hand2.value == 1
+    #     elsif self.cards[0].value == 1
+    #         return hand1
+    #     elsif self.cards[0].value == 1
+    #         return self
+    #     elsif hand2.cards[0].value == 1
+    #         return hand2
+    #     end
+        
+    #     4.downto(0) do |card|
+    #         self.cards[card].value > hand2.cards[card].value ? 
+    #         self :
+    #         hand2
+    #     end
+
+    # end
 end
