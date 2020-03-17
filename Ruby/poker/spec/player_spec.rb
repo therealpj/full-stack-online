@@ -22,7 +22,7 @@ describe 'Player' do
         end
     end
 
-    context '#discard' do
+    context '#discard_at' do
         let(:pos) {[0, 1, 2]}
         let(:hand2) { Hand.new([
         Card.new(:spade, 3),
@@ -32,21 +32,21 @@ describe 'Player' do
         Card.new(:spade, 4),
     ])}
         it 'should accept an array of poisitions as arguments' do
-            expect {player1.discard(pos)}.not_to raise_error
+            expect {player1.discard_at(pos)}.not_to raise_error
         end
 
         it 'when passed in wrong number of positions raises error' do    
-            expect {player1.discard([1,2,3,4])}.to raise_error(ArgumentError)
-            expect {player1.discard([])}.to raise_error(ArgumentError)
+            expect {player1.discard_at([1,2,3,4])}.to raise_error(ArgumentError)
+            expect {player1.discard_at([])}.to raise_error(ArgumentError)
         end
 
         it 'when passed in invalid positions raises error' do
-            expect {player1.discard[-1]}.to raise_error(ArgumentError)
-            expect {player1.discard[5]}.to raise_error(ArgumentError)
+            expect {player1.discard_at[-1]}.to raise_error(ArgumentError)
+            expect {player1.discard_at[5]}.to raise_error(ArgumentError)
         end
 
-        it 'when passed in an array of positions correctly discards them from hand' do
-            expect(player1.discard([0, 1])).to eq(2)
+        it 'when passed in an array of positions correctly discard_ats them from hand' do
+            expect(player1.discard_at([0, 1])).to eq(2)
             expect(player1.hand.cards.length).to eq(3)
             hand2.cards.shift
             hand2.cards.shift
