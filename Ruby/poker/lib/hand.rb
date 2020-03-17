@@ -1,3 +1,4 @@
+require_relative 'hand_type'
 
 class Hand
     HAND_PRIORITY = [
@@ -14,10 +15,14 @@ class Hand
     
     attr_reader :cards
     def initialize(cards)
-        raise "Each hand must have 5 cards" unless cards.length == 0
+        raise "Each hand must have 5 cards" unless cards.length == 5
         @cards = cards.sort
     end
 
-    
+    def hand_type
+        type = HandType.new(cards)
+        type.type
+    end
+
 
 end
