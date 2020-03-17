@@ -109,6 +109,25 @@ class TieBreaker
         hp1 > hp2 ? hp1 : hp2
     end
 
+    def one_pair
+        if val_hash_1.find(1) == val_hash_2.find(1)
+            return ace_in_one if ace_in_one
+            4.downto(0) do |card|
+                next if hand1.cards[card].value == hand2.cards[cards].value
+                return hand1.cards[card] > hand2.cards[card] ? hand1 : hand2
+            end
+        end
+        val_hash_1.find(1) > val_hash_2.find(2) ? hand1 : hand2    
+    end
+
+    def high_card
+        return ace_in_one if ace_in_one
+        4.downto(0) do |card|
+            next if hand1.cards[card].value == hand2.cards[cards].value
+            return hand1.cards[card] > hand2.cards[card] ? hand1 : hand2    
+        end
+    end
+
     def high_pair(hand)
         sorted = make_value_hash(hand).sort
         if sorted[2][1] == 1
