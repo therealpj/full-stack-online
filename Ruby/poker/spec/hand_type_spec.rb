@@ -67,7 +67,7 @@ describe '#HandType' do
         Card.new(:club, 2),
     ])}
 
-    let(:high_card_hand1) {Hand.new([
+    let(:high_card_hand) {Hand.new([
         Card.new(:diamond, 4),
         Card.new(:heart, 8),
         Card.new(:spade, 6),

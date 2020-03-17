@@ -44,10 +44,15 @@ class HandType
     end
 
     def straight
-        i = cards[0].value
-        cards.each do |card|
-            return false unless card.value == i
-            i += 1
+        # a straight is just consecutive values.
+        # the cards are already sorted, so we don't need to sort them here.
+        values = self.values
+        return false unless values.uniq.length == 5
+
+        start = values[0]
+        values.each do |val|
+            return false unless val == start
+            start += 1
         end
 
         return :straight
@@ -66,6 +71,8 @@ class HandType
     end
 
     def pairs
+        return false if values.uniq.length == 5
+        # for each value, we check if it has a pair.
         values = self.values
         pairs = 0
         values.uniq.each do |val|
@@ -78,12 +85,17 @@ class HandType
     end
 
     def type
+        # using the lazy evaluation of ruby
+        # the cards will be checked one by one for each card type.
+        # if no type is matched, we don't have a particular hand, 
+        # hence returning high card.
         straight_flush || four_of_a_kind || full_house || flush || straight || 
         three_of_a_kind || pairs || :high_card
     end
 
 
     def values
+        # helper method to return the values of all the cards
         values = []
         cards.each do |card|
             values << card.value
