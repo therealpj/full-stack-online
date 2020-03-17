@@ -14,7 +14,7 @@ describe 'Player' do
         Card.new(:spade, 4),
     ])}
 
-    subject(:player1) { Player.new(hand, 100)} 
+    subject(:player1) { Player.new('pj',hand, 100)} 
     context '#initialize' do
         it 'should accept a hand and pot as arguments' do
             expect {player1}.not_to raise_error

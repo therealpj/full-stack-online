@@ -2,8 +2,9 @@ require_relative 'hand.rb'
 
 class Player
 
-    attr_reader :hand, :pot
-    def initialize(hand, pot)
+    attr_reader :hand, :pot, :name
+    def initialize(name, hand, pot)
+        @name = name
         @pot = pot
         @hand = hand
     end
@@ -20,7 +21,7 @@ class Player
         end
         
         # printing out the discarded cards
-        print "Discarded: "
+        print "Poker player " + name + "discarded: "
         dicarded.each do |card|
             print card.symbol 
             puts " "
@@ -45,7 +46,7 @@ class Player
     def get_input
 
         begin
-            puts 'What do you want to do?'
+            puts 'What do you want to do, ' + name
             puts "1. Fold"
             puts "2. Raise"
             puts "3. See the current bet"
