@@ -46,7 +46,7 @@ describe 'Player' do
         end
 
         it 'when passed in an array of positions correctly discards them from hand' do
-            player1.discard([0, 1])
+            expect(player1.discard([0, 1])).to eq(2)
             expect(player1.hand.cards.length).to eq(3)
             hand2.cards.shift
             hand2.cards.shift
@@ -59,6 +59,8 @@ describe 'Player' do
                 values_doub <<[card.value, card.suit]
             end
             expect(values_orig).to eql(values_doub)
+
         end
+
     end
 end

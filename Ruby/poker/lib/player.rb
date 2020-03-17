@@ -10,8 +10,13 @@ class Player
 
     def discard(positions)
         raise ArgumentError unless positions.length.between?(1, 3)
-        positions.length.times do
-            hand.cards.shift
+        hand.cards.each.with_index do |card, pos|
+            hand.cards[pos] =  nil if positions.include?(pos)
         end
+        hand.cards.select! {|card| card != nil}
+        return positions.length
     end
+
+    # def get_cards_to_discard
+
 end
