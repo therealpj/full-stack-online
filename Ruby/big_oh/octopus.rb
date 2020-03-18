@@ -32,13 +32,29 @@ end
 # p biggest_fish_linear(['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'ffiiiiisshh', 'fsh', 'fiiiissshhhhhh'])
 
 
+def dance_slow(move, tiles_array)
+    tiles_array.each.with_index do |move_type, pos|
+        return pos if move_type == move
+    end
+    return -1
+end
 
+def dance_fast(move, tiles_hash)
+    tiles_hash[move]
+end
 
+def make_tiles_hash(tiles_array)
+    hash = Hash.new(0)
+    tiles_array.each.with_index do |move, idx|
+        hash[move] = idx
+    end
+    hash
+end
 
+$tiles_array = ["up", "right-up", "right", "right-down", "down", "left-down", "left",  "left-up" ]
 
-
-
-
+p dance_slow("left-up", $tiles_array)
+p dance_fast("left-up", make_tiles_hash($tiles_array))
 
 
 
