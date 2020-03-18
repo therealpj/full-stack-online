@@ -23,7 +23,7 @@ class Player
         end
         
         # printing out the discarded cards
-        print "Poker player " + name + "discarded: "
+        print "Poker player " + name + " discarded: "
         dicarded.each do |card|
             print card.symbol 
             puts " "
@@ -101,11 +101,6 @@ class Player
         @hand = nil
         cards
     end
-
-    def trade_cards(old_cards, new_cards)
-        hand.trade_cards(old_cards, new_cards)
-    end
-
 
     def valid?(choice)
         valid_choices = [
