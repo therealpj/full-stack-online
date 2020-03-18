@@ -18,7 +18,7 @@ def biggest_fish_linearithmic(fishes)
     return fishes[-1]
 end
 
-p biggest_fish_linearithmic(['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'ffiiiiisshh', 'fsh', 'fiiiissshhhhhh'])
+# p biggest_fish_linearithmic(['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'ffiiiiisshh', 'fsh', 'fiiiissshhhhhh'])
 
 
 def biggest_fish_linear(fishes)
@@ -29,7 +29,7 @@ def biggest_fish_linear(fishes)
     biggest
 end
 
-p biggest_fish_linear(['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'ffiiiiisshh', 'fsh', 'fiiiissshhhhhh'])
+# p biggest_fish_linear(['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'ffiiiiisshh', 'fsh', 'fiiiissshhhhhh'])
 
 
 
