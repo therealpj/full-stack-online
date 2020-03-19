@@ -73,14 +73,15 @@ class StackQueue
 end
 
 class MinMaxStack < Stack
-
+    PositiveInfinity = +1.0 / 0.0
+    NegativeInfinity = -1.0/0.0
     attr_reader :max, :min
     def initialize
         super
 
         # Positive and negative infinity for initial max and min
-        @min = +1.0 / 0.0
-        @max = -1.0/0.0
+        @min = PositiveInfinity
+        @max = NegativeInfinity
     end
 
     def push(ele)
@@ -96,17 +97,49 @@ class MinMaxStack < Stack
     def pop
         popped = @arr.pop
         if popped == max
-            @max = @arr.max
+            @max = @arr.max || NegativeInfinity
         end
         if popped == min
-            @min = @arr.min
+            @min = @arr.min || PositiveInfinity
         end
+
+        popped
     end
 end
 
 
 
+class MinMaxStackQueue
+    def initialize
+        @stack = MinMaxStack.new
+        @rev_stack = MinMaxStack.new
+    end
 
+    def enqueue(ele)
+        @stack.push(ele)
+    end
+
+    def dequeue
+        reversify if @rev_stack.empty?
+        @rev_stack.pop
+    end
+
+    def reversify
+        @rev_stack.push(@stack.pop) until @stack.empty?
+    end
+
+    def empty
+        @stack.empty? || @rev_stack.empty?
+    end
+
+    def max
+        @stack.max > @rev_stack.max ? @stack.max : @rev_stack.max
+    end
+
+    def min
+        @stack.min < @rev_stack.min ? @stack.min : @rev_stack.min
+    end
+end
 
 
 
