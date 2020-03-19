@@ -72,6 +72,43 @@ class StackQueue
     end
 end
 
+class MinMaxStack < Stack
+
+    attr_reader :max, :min
+    def initialize
+        super
+
+        # Positive and negative infinity for initial max and min
+        @min = +1.0 / 0.0
+        @max = -1.0/0.0
+    end
+
+    def push(ele)
+        if ele > max
+            @max = ele
+        end
+        if ele < min
+            @min = ele
+        end
+        @arr << ele
+    end
+
+    def pop
+        popped = @arr.pop
+        if popped == max
+            @max = @arr.max
+        end
+        if popped == min
+            @min = @arr.min
+        end
+    end
+
+end
+
+
+
+
+
 
 
 
