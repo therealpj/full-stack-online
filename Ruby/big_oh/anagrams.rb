@@ -73,11 +73,3 @@ end
 # p fourth_anagram?('abcdefghijklmnop', 'ponmlkjihgfedcba')
 # p second_anagram?('octopus', 'octopus'.split("").shuffle.join(""))
 # p second_anagram?('HelloFromTheOtherSide', 'AtleastICanSayThatITried')
-
-
-
-
-
-
-
-
