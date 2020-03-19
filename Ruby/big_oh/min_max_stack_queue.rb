@@ -102,7 +102,6 @@ class MinMaxStack < Stack
             @min = @arr.min
         end
     end
-
 end
 
 
