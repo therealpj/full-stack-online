@@ -71,10 +71,18 @@ def largest_contigous_sum(arr)
     max
 end
 
-# p largest_contigous_sum([-5, -1, -3])
+# p largest_contigous_sum([2,3,-6,7,-6,7])
 
 
+def largest_contigous_sum_linear(arr)
+    largest = arr[0]
+    cur = arr[0]
+    (1...arr.length).each do |i|
+        cur = 0 if cur <= 0
+        cur += arr[i]
+        largest = cur if largest < cur
+    end
+    largest
+end
 
-
-
-
+p largest_contigous_sum_linear([1,2,-3, 2, 1].to_a.shuffle)
