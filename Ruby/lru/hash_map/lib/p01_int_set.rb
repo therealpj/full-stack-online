@@ -34,21 +34,29 @@ end
 class IntSet
   def initialize(num_buckets = 20)
     @store = Array.new(num_buckets) { Array.new }
+    @buckets = num_buckets
   end
 
   def insert(num)
+    idx = num % @buckets
+    @store[idx] << num
   end
 
   def remove(num)
+    idx = num % @buckets
+    @store[idx].delete(num)
   end
 
   def include?(num)
+    idx = num % @buckets
+    @store[idx].include?(num)
   end
 
   private
 
   def [](num)
-    # optional but useful; return the bucket corresponding to `num`
+    idx = num  % @buckets
+    @store[idx]
   end
 
   def num_buckets
