@@ -29,6 +29,10 @@ describe MaxIntSet do
       set.insert(1)
       expect(set.store[1]).to be true
     end
+    it "should return true if the number has been inserted" do
+      set.insert(1)
+      expect(set).to include(1)
+    end
   end
 
   describe "#remove" do
@@ -48,10 +52,7 @@ describe IntSet do
       expect(set).to_not include(1)
     end
 
-    it "should return true if the number has been inserted" do
-      set.insert(1)
-      expect(set).to include(1)
-    end
+    
   end
 
   describe "#insert" do
