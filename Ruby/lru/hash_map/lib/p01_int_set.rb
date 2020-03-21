@@ -38,18 +38,15 @@ class IntSet
   end
 
   def insert(num)
-    idx = num % @buckets
-    @store[idx] << num
+    self[num] << num
   end
 
   def remove(num)
-    idx = num % @buckets
-    @store[idx].delete(num)
+    self[num].delete(num)
   end
 
   def include?(num)
-    idx = num % @buckets
-    @store[idx].include?(num)
+    self[num].include?(num)
   end
 
   private
