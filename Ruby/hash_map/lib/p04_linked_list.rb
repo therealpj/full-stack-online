@@ -49,20 +49,12 @@ class LinkedList
   end
 
   def get(key)
-    traverser = self.head
-    while traverser.next != nil
-      return traverser.val if traverser.key == key
-      traverser = traverser.next
-    end
+    each {|traverser| return traverser.val if traverser.key == key}
     return nil
   end
 
   def include?(key)
-    traverser = self.head
-    while traverser.next != nil
-      return true if traverser.key == key
-      traverser = traverser.next
-    end
+    each { |traverser| return true if traverser.key == key }
     return false
   end
 
@@ -75,22 +67,16 @@ class LinkedList
   end
 
   def update(key, val)
-    traverser = self.head
-    while traverser.next != nil
-      traverser.val = val if traverser.key == key
-      traverser = traverser.next
-    end
+    each {|traverser| traverser.val = val if traverser.key == key }
   end
 
   def remove(key)
-    traverser = self.head
-    while traverser.next != nil
+    each do |traverser|
       if traverser.key == key
         traverser.prev.next = traverser.next
         traverser.next.prev = traverser.prev
         traverser.remove
       end
-      traverser = traverser.next  
     end
   end
 
