@@ -75,7 +75,9 @@ class LinkedList
       if traverser.key == key
         traverser.prev.next = traverser.next
         traverser.next.prev = traverser.prev
-        traverser.remove
+        traverser.next =nil
+        traverser.prev = nil
+        return true
       end
     end
   end
