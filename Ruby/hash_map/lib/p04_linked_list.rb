@@ -14,13 +14,21 @@ class Node
   end
 
   def remove
-    # optional but useful, connects previous link to next link
-    # and removes self from list.
+    prev_dup = self.prev
+    self.prev = self.next
+    self.next.prev = prev_dup
   end
 end
 
 class LinkedList
+  include Enumerable
+  
+  attr_reader :head, :tail
   def initialize
+    @head = Node.new
+    @tail = Node.new
+    @head.next = @tail
+    @tail.prev = @head
   end
 
   def [](i)
@@ -29,12 +37,15 @@ class LinkedList
   end
 
   def first
+    @head
   end
 
   def last
+    @tail
   end
 
   def empty?
+
   end
 
   def get(key)
@@ -44,6 +55,8 @@ class LinkedList
   end
 
   def append(key, val)
+    puts @tail
+    @tail = new_node
   end
 
   def update(key, val)
