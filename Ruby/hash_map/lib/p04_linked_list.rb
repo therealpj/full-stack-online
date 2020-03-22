@@ -37,39 +37,74 @@ class LinkedList
   end
 
   def first
-    @head
+    @head.next
   end
 
   def last
-    @tail
+    @tail.prev
   end
 
   def empty?
-
+    @head.next.key == nil
   end
 
   def get(key)
+    traverser = self.head
+    while traverser.next != nil
+      return traverser.val if traverser.key == key
+      traverser = traverser.next
+    end
+    return nil
   end
 
   def include?(key)
+    traverser = self.head
+    while traverser.next != nil
+      return true if traverser.key == key
+      traverser = traverser.next
+    end
+    return false
   end
 
   def append(key, val)
-    puts @tail
-    @tail = new_node
+    new_node = Node.new(key, val)
+    self.tail.prev.next = new_node
+    new_node.next = self.tail
+    new_node.prev = self.tail.prev
+    self.tail.prev = new_node
   end
 
   def update(key, val)
+    traverser = self.head
+    while traverser.next != nil
+      traverser.val = val if traverser.key == key
+      traverser = traverser.next
+    end
   end
 
   def remove(key)
+    traverser = self.head
+    while traverser.next != nil
+      if traverser.key == key
+        traverser.prev.next = traverser.next
+        traverser.next.prev = traverser.prev
+        traverser.remove
+      end
+      traverser = traverser.next  
+    end
   end
 
-  def each
+  def each(&prc)
+    traverser = self.head
+    while traverser.next != nil
+      prc.call(traverser) unless traverser.key == nil
+      traverser = traverser.next
+    end
+  
   end
 
   # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
-  # end
+  def to_s
+    inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
+  end
 end
