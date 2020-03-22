@@ -64,6 +64,7 @@ class LinkedList
     new_node.next = self.tail
     new_node.prev = self.tail.prev
     self.tail.prev = new_node
+    new_node
   end
 
   def update(key, val)
@@ -77,7 +78,7 @@ class LinkedList
         traverser.next.prev = traverser.prev
         traverser.next =nil
         traverser.prev = nil
-        return true
+        return key
       end
     end
   end
