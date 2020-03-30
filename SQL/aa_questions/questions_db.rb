@@ -9,6 +9,5 @@ class QuestionsDB < SQLite3::Database
         self.type_translation = true
         self.results_as_hash = true
     end
-end
 
-   
+end

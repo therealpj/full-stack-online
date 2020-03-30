@@ -69,6 +69,7 @@ INSERT INTO
 ;
 
 CREATE TABLE follows (
+    id INTEGER PRIMARY KEY,
     user_id INTEGER NOT NULL,
     question_id INTEGER NOT NULL,
 
@@ -84,6 +85,7 @@ VALUES
 );
 
 CREATE TABLE likes (
+    id INTEGER PRIMARY KEY,
     user_id INTEGER NOT NULL,
     question_id INTEGER NOT NULL,
 
