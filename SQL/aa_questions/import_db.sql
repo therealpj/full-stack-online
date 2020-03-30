@@ -43,6 +43,7 @@ CREATE TABLE questions (
 INSERT INTO
     questions(title, user_id)
 VALUES
+        ('WHERE IS MY SANDWICH?', (SELECT id FROM users WHERE fname = 'Liz')),
         ('Why did you fire Pete?', (SELECT id FROM users WHERE fname = 'Liz')),
         ('Where is my tarantula?', (SELECT id FROM users WHERE fname ='Tracy'))
  ;

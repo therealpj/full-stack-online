@@ -12,4 +12,18 @@ class User
         @lname = options["lname"]
     end
 
+    def self.find_by_name(fname, lname)
+        QuestionsDB.instance.execute(<<-SQL, fname, lname)
+            SELECT
+                *
+            FROM
+                users
+            WHERE
+                fname like ?
+            AND
+                lname like ?
+        SQL
+    end
+
+
 end

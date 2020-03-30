@@ -14,4 +14,14 @@ class Reply
         @user_id = options['user_id']
     end
 
+    def self.find_by_user_id(user_id)
+        QuestionsDB.instance.execute("SELECT * FROM replies WHERE user_id = #{user_id}")
+    end
+
+    def self.find_by_question_id(question_id)
+        QuestionsDB.instance.execute("SELECT * FROM replies WHERE question_id = #{question_id}")
+    end
+
+    
+
 end

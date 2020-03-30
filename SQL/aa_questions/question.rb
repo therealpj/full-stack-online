@@ -14,10 +14,9 @@ class Question
     end
 
     def self.find_by_user_id(user_id)
-        data = QuestionsDB.instance.execute("SELECT * FROM questions WHERE user_id = #{user_id}")
-        puts data
+        QuestionsDB.instance.execute("SELECT * FROM questions WHERE user_id = #{user_id}")
     end
-    
+
 
 
 end
