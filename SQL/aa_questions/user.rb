@@ -37,4 +37,5 @@ class User
         Follow.followed_questions_for_user_id(self.id)
     end
 
+
 end

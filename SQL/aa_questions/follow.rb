@@ -39,6 +39,20 @@ class Follow
         SQL
     end
 
-    
+    def self.most_followed_questions(n)
+        data = QuestionsDB.instance.execute(<<-SQL, n)
+            SELECT
+                questions.*
+            FROM
+                questions
+            JOIN
+                follows ON questions.id = follows.question_id
+            GROUP BY
+                questions.title
+            LIMIT ?
+        SQL
+        data.map { |datum| Follow.new(datum)}
+    end
+
 
 end

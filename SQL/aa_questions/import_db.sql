@@ -99,8 +99,8 @@ CREATE TABLE likes (
     question_id INTEGER NOT NULL,
 
     FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (question_id) REFERENCES questions(id)
-);
+    FOREIGN KEY (question_id) REFERENCES questions(id))
+    ;
 
 INSERT INTO
     likes(user_id , question_id)
@@ -109,6 +109,8 @@ VALUES
     (SELECT id FROM questions WHERE title='Where is my tarantula?')),
 
     ((SELECT id FROM users WHERE fname='Jenna'),
+    (SELECT id FROM questions WHERE title like 'where is my%')),
+    ((SELECT id FROM users WHERE fname='Liz'),
     (SELECT id FROM questions WHERE title like 'where is my%'))
 ;
 
