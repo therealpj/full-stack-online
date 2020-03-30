@@ -17,6 +17,10 @@ class Question
         QuestionsDB.instance.execute("SELECT * FROM questions WHERE user_id = #{user_id}")
     end
 
+    def self.most_liked(n)
+        Like.most_liked_questions(n)
+    end
+
     def author
         QuestionsDB.instance.execute(<<-SQL, self.user_id)
             SELECT
@@ -28,6 +32,10 @@ class Question
         SQL
     end
 
+    def self.most_followed(n)
+        Follow.most_followed_questions(n)
+    end
+
     def replies
         Reply.find_by_question_id(self.id)
     end
@@ -36,9 +44,12 @@ class Question
         Follow.followers_for_question_id(self.id)
     end
 
-    def self.most_followed(n)
-        Follow.most_followed_questions(n)
+    def likers
+        Like.likers_for_question_id(self.id)
     end
-    
+
+    def num_likes
+        Like.num_likes_for_question_id(self.id)
+    end
 
 end
