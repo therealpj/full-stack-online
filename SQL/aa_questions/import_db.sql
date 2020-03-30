@@ -86,6 +86,8 @@ INSERT INTO
 VALUES
     ((SELECT id FROM users WHERE fname = 'Liz'),
     (SELECT id FROM questions WHERE title = 'Why did you fire Pete?')),
+    ((SELECT id FROM users WHERE fname = 'Kenneth'),
+    (SELECT id FROM questions WHERE title = 'Why did you fire Pete?')),
 
     ((SELECT id FROM users WHERE fname = 'Liz'),
     (SELECT id FROM questions WHERE title like 'where is my%'))
@@ -109,3 +111,6 @@ VALUES
     ((SELECT id FROM users WHERE fname='Jenna'),
     (SELECT id FROM questions WHERE title like 'where is my%'))
 ;
+
+.mode column
+.headers on

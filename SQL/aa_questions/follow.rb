@@ -12,4 +12,33 @@ class Follow
         @question_id = options['question_id']
     end
 
+    def self.followers_for_question_id(question_id)
+        data = QuestionsDB.instance.execute(<<-SQL, question_id)
+            SELECT
+                users.id, users.fname, users.lname
+            FROM
+                users
+            JOIN
+                follows ON users.id = follows.user_id
+            WHERE
+                follows.question_id = ?
+        SQL
+        data.map { |datum| User.new(datum) }
+    end
+
+    def self.followed_questions_for_user_id(user_id)
+        data = QuestionsDB.instance.execute(<<-SQL, user_id)
+            SELECT
+                questions.*
+            FROM
+                questions
+            JOIN
+                follows ON questions.id = follows.question_id
+            WHERE
+                follows.user_id = ?
+        SQL
+    end
+
+    
+
 end
