@@ -57,4 +57,28 @@ class User
         SQL
     end
 
+    def save
+        raise "Already in database" if self.id
+        QuestionsDB.instance.execute(<<-SQL, self.fname, self.lname)
+            INSERT INTO
+                users(fname, lname)
+            VALUES
+                (?, ?)
+        SQL
+        @id = QuestionsDB.instance.last_insert_row_id
+    end
+
+    def update
+        raise "Not in database" unless self.id
+        QuestionsDB.instance.execute(<<-SQL,  self.fname, self.lname, self.id)
+            UPDATE
+                users
+            SET
+                fname = ?,
+                lname = ?
+            WHERE
+                id = ?
+                SQL
+        end
+
 end
