@@ -65,6 +65,9 @@ INSERT INTO
     replies(body, question_id, parent_id, user_id)
     VALUES
         ('Good god Lemon', (SELECT id FROM questions WHERE title = 'Why did you fire Pete?'), null, (SELECT id FROM users WHERE fname = 'Jack') ),
+        ('Answer my question', (SELECT id FROM questions WHERE title like 'Why did you fire Pete?'), (SELECT id FROM replies WHERE body = 'Good god Lemon'), (SELECT id FROM users WHERE fname = 'Liz' )),
+
+        ('It was Mr. Lutz and Mr. Toofer', (SELECT id FROM questions WHERE title like 'where is my%'), null, (SELECT id FROm users WHERE fname = 'Kenneth')),
 
         ('On my head', (SELECT id FROM questions WHERE title = 'Where is my tarantula?'), null, (SELECT id FROM users WHERE fname = 'Kenneth'))
 ;
@@ -82,8 +85,11 @@ INSERT INTO
     follows(user_id, question_id)
 VALUES
     ((SELECT id FROM users WHERE fname = 'Liz'),
-    (SELECT id FROM questions WHERE title = 'Why did you fire Pete?')
-);
+    (SELECT id FROM questions WHERE title = 'Why did you fire Pete?')),
+
+    ((SELECT id FROM users WHERE fname = 'Liz'),
+    (SELECT id FROM questions WHERE title like 'where is my%'))
+;
 
 CREATE TABLE likes (
     id INTEGER PRIMARY KEY,
@@ -98,5 +104,8 @@ INSERT INTO
     likes(user_id , question_id)
 VALUES
     ((SELECT id FROM users WHERE fname='Tracy'),
-    (SELECT id FROM questions WHERE title='Where is my tarantula?')
-);
+    (SELECT id FROM questions WHERE title='Where is my tarantula?')),
+
+    ((SELECT id FROM users WHERE fname='Jenna'),
+    (SELECT id FROM questions WHERE title like 'where is my%'))
+;
