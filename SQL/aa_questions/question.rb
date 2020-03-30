@@ -17,6 +17,21 @@ class Question
         QuestionsDB.instance.execute("SELECT * FROM questions WHERE user_id = #{user_id}")
     end
 
+    def author
+        QuestionsDB.instance.execute(<<-SQL, self.user_id)
+            SELECT
+                fname, lname
+            FROM
+                users
+            WHERE
+                id = ?
+        SQL
+    end
 
+    def replies
+        Reply.find_by_question_id(self.id)
+    end
+
+    
 
 end
